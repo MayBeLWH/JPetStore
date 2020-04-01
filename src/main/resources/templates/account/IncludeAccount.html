@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MyPetStore</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<includeAccount th:fragment="includeAccount">
+
+        <h3>Account Information</h3>
+<!--        <%&#45;&#45;private String firstName;&#45;&#45;%>-->
+<!--        <%&#45;&#45;private String lastName;&#45;&#45;%>-->
+<!--        <%&#45;&#45;private String status;&#45;&#45;%>-->
+<!--        <%&#45;&#45;private String address1;&#45;&#45;%>-->
+<!--        <%&#45;&#45;private String address2;&#45;&#45;%>-->
+<!--        <%&#45;&#45;private String city;&#45;&#45;%>-->
+<!--        <%&#45;&#45;private String state;&#45;&#45;%>-->
+<!--        <%&#45;&#45;private String zip;&#45;&#45;%>-->
+<!--        <%&#45;&#45;private String country;&#45;&#45;%>-->
+<!--        <%&#45;&#45;private String phone;&#45;&#45;%>-->
+<!--        <%&#45;&#45;private String favouriteCategoryId;&#45;&#45;%>-->
+<!--        <%&#45;&#45;private String languagePreference;&#45;&#45;%>-->
+<!--        <%&#45;&#45;private boolean listOption;&#45;&#45;%>-->
+<!--        <%&#45;&#45;private boolean bannerOption;&#45;&#45;%>-->
+<!--        <%&#45;&#45;private String bannerName;&#45;&#45;%>-->
+        <table>
+            <tr>
+                <td>First name:</td>
+                <td><input type="text" name="firstName" required="required" th:value="${account.firstName}"/></td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td><input type="text" name="lastName" required="required" th:value="${account.lastName}"/></td>
+            </tr>
+            <tr>
+                <td>Email:</td>
+                <td><input type="text" size="40" name="email" required="required" th:value="${account.email}"/></td>
+            </tr>
+            <tr>
+                <td>Phone:</td>
+                <td><input type="text" name="phone" required="required" th:value="${account.phone}"/></td>
+            </tr>
+            <tr>
+                <td>Address 1:</td>
+                <td><input type="text" size="40" name="address1" required="required" th:value="${account.address1}"/></td>
+            </tr>
+            <tr>
+                <td>Address 2:</td>
+                <td><input type="text" size="40" name="address2" th:value="${account.address2}"/></td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td><input type="text"name="city" required="required" th:value="${account.city}"/></td>
+            </tr>
+            <tr>
+                <td>State:</td>
+                <td><input type="text" size="4" name="state" required="required" th:value="${account.state}"/></td>
+            </tr>
+            <tr>
+                <td>Zip:</td>
+                <td><input type="text"size="10" name="zip" th:value="${account.zip}"/></td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td><input type="text" size="15" name="country" required="required" th:value="${account.country}"/></td>
+            </tr>
+        </table>
+
+        <h3>Profile Information</h3>
+
+        <table>
+            <tr>
+                <td>Language Preference:</td>
+                <td>
+                    <select name="languagePreference">
+                        <option value="english">english</option>
+                        <option value="chinese">chinese</option>
+                        <option value="japanese">japanese</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Favourite Category:</td>
+                <td>
+                    <select name="favouriteCategoryId">
+                        <option value="FISH">FISH</option>
+                        <option value="REPTILES">REPTILES</option>
+                        <option value="CATS">CATS</option>
+                        <option value="DOGS">DOGS</option>
+                        <option value="BIRDS">BIRDS</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Enable MyList</td>
+                <td>
+                    <input type="checkbox" name="listOption" />
+                </td>
+            </tr>
+            <tr>
+                <td>Enable MyBanner</td>
+                <td>
+                    <input type="checkbox" name="bannerOption" />
+                </td>
+            </tr>
+        </table>
+</includeAccount>
+
+</body>
+</html>

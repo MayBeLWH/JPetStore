@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MyPetStore</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<div th:replace="common/Top"></div>
+<div id="BackLink">
+    <a href="/catalog/view">
+    Return to Main Menu
+    </a>
+</div>
+
+<div id="Catalog">
+
+    <h2 th:text="${category.getName()}" id="category-title">category name</h2>
+
+    <table>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+        </tr>
+        <tr th:each="product:${productList}">
+            <td>
+                <a th:href="@{/catalog/viewProduct(productId=${product.getProductId()})}"
+                   th:text="${product.getProductId()}">
+                    Product ID
+                </a>
+            </td>
+            <td th:text="${product.getName()}">Product Name</td>
+        </tr>
+
+
+<!--        <c:forEach var="product" items="${actionBean.productList}">-->
+<!--            <tr>-->
+<!--                <td><stripes:link-->
+<!--                        beanclass="org.mybatis.jpetstore.web.actions.CatalogActionBean"-->
+<!--                        event="viewProduct">-->
+<!--                    <stripes:param name="productId" value="${product.productId}" />-->
+<!--                    ${product.productId}-->
+<!--                </stripes:link></td>-->
+<!--                <td>${product.name}</td>-->
+<!--            </tr>-->
+<!--        </c:forEach>-->
+    </table>
+</div>
+<div th:replace="common/Bottom"></div>
+</body>
+</html>

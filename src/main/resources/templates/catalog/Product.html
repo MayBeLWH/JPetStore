@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MyPetStore</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<div th:replace="common/Top"></div>
+<div id="content">
+    <div id="BackLink">
+        <a th:href="@{/catalog/viewCategory(categoryId=${product.getCategoryId()})}"
+            th:text=" 'Return to '+${product.getCategoryId()}">
+            Return to category ID
+        </a>
+    </div>
+
+    <div id="Catalog">
+
+        <h2 th:text="${product.getName()}">Product name</h2>
+
+        <table>
+            <tr>
+                <th>Item ID</th>
+                <th>Product ID</th>
+                <th>Description</th>
+                <th>List Price</th>
+                <th>&nbsp;</th>
+            </tr>
+
+            <tr th:each="item:${itemList}">
+                <td>
+                    <a th:href="@{/catalog/viewItem(itemId=${item.getItemId()})}"
+                        th:text="${item.itemId}">
+                        Item Id
+                    </a>
+                </td>
+                <td th:text="${item.getProductId()}">item product productId</td>
+                <td th:text="${item.getAttribute1()}+${item.getAttribute2()}+${item.getAttribute3()}+
+                    ${item.getAttribute4()}+${item.getAttribute5()}+${product.getName()}">
+                    ${item.attribute1} ${item.attribute2} ${item.attribute3}
+                    ${item.attribute4} ${item.attribute5} ${sessionScope.product.name}
+                </td>
+                <td th:text="${item.getListPrice()}">
+<!--                    <fmt:formatNumber value="${item.listPrice}" pattern="$#,##0.00"/>-->
+                </td>
+                <td>
+                    <a class="Button" href="#">Add to Cart</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+<div th:replace="common/Bottom"></div>
+</body>
+</html>

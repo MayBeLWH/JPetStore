@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MyPetStore</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<div th:replace="common/Top"></div>
+<div id="content" align="center">
+    <form action="/account/editAccount" method="post">
+        <h3>User Information</h3>
+        <table>
+            <tr>
+                <td>User ID:</td>
+                <td><input type="text" name="username" id="username" th:value="${account.username}" onblur=""/></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td id="usernameMsg"></td>
+            </tr>
+            <tr>
+                <td>New password:</td>
+                <td><input id="password" type="password" th:value="${account.password}" name="password" /></td>
+            </tr>
+            <tr>
+                <td>Repeat password:</td>
+                <td><input id="repeatPassword" type="password" name="repeatedPassword"  onblur=""/></td>
+            </tr>
+        </table>
+        <div th:replace="account/IncludeAccount"></div>
+        <input type="submit" name="newAccount" value="Update Account Information" />
+    </form>
+</div>
+<div th:replace="common/Bottom"></div>
+</body>
+</html>

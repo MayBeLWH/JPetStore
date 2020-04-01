@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MyPetStore</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+    <header th:fragment="header">
+        <div id="Header">
+
+            <div id="Logo">
+                <div id="LogoContent">
+                    <a href="main"><img src="../images/logo-topbar.gif" /></a>
+                </div>
+            </div>
+
+            <div id="Menu">
+                <div id="MenuContent">
+                    <a href="/cart/viewCart"><img align="middle" name="img_cart" src="../images/cart.gif" /></a>
+                    <img align="middle" src="../images/separator.gif" />
+                    <a href="/account/signOut" th:if="(${ session.account } != null)and (${session.authenticated})">Sign Out</a>
+                    <a href="/account/singOnForm" th:if="(${session.account} != null) and (${!session.authenticated})">Sign In</a>
+                    <img align="middle" src="../images/separator.gif" th:if="(${ session.account } != null)and (${session.authenticated})" />
+                    <a href="/account/viewAccount" th:if="(${ session.account } != null)and (${session.authenticated})">My Account</a>
+                    <img align="middle" src="../images/separator.gif" />
+                    <a href="../help.html">?</a>
+                </div>
+            </div>
+
+            <div id="Search">
+                <div id="SearchContent" >
+                    <form action="searchProduct" method="post" autocomplete="off">
+                        <input type="text" name="keyword" id="searchItem" size="14" list="optionList" oninput="callItem()"/>
+                        <datalist id="optionList">
+
+                        </datalist>
+                        <input type="submit" name="searchProducts" value="Search" />
+                    </form>
+                </div>
+            </div>
+
+            <div id="QuickLinks">
+                <a href="/catalog/viewCategory?categoryId=FISH">
+                    <img src="../images/sm_fish.gif" />
+                </a>
+                <img src="../images/separator.gif" />
+                <a href="/catalog/viewCategory?categoryId=DOGS">
+                    <img src="../images/sm_dogs.gif" />
+                </a>
+                <img src="../images/separator.gif" />
+                <a href="/catalog/viewCategory?categoryId=REPTILES">
+                    <img src="../images/sm_reptiles.gif" />
+                </a>
+                <img src="../images/separator.gif" />
+                <a href="/catalog/viewCategory?categoryId=CATS">
+                    <img src="../images/sm_cats.gif" />
+                </a>
+                <img src="../images/separator.gif" />
+                <a href="/catalog/viewCategory?categoryId=BIRDS">
+                    <img src="../images/sm_birds.gif" />
+                </a>
+            </div>
+
+        </div>
+        <script type="text/javascript">
+            function callItem() {
+                var keyword=$('#searchItem').val();
+                $.get('getIdByKey?keyword='+keyword,function (data) {
+                    var arr=JSON.parse(data);
+                    var newContent='';
+                    for (var i = 0; i < arr.length; i++) {
+                        newContent+='<option>'+optionHTML(keyword,arr[i])+'</option>';
+                    }
+                    console.log(newContent)
+                    document.getElementById('optionList').innerHTML=newContent;
+                });
+            }
+
+            function optionHTML(key,str) {
+                var reg = new RegExp("(" + key + ")", "g");
+                var newstr = str.replace(reg,'<span class="color-palette-region">$1</span>');
+                return newstr;
+            }
+        </script>
+    </header>
+</body>
+</html>
