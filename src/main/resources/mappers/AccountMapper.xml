@@ -54,25 +54,49 @@
             AND PROFILE.USERID = ACCOUNT.USERID
             AND PROFILE.FAVCATEGORY = BANNERDATA.FAVCATEGORY
     </select>
+
     <insert id="insertAccount" parameterType="Account">
-    INSERT INTO ACCOUNT
-      (EMAIL, FIRSTNAME, LASTNAME, STATUS, ADDR1, ADDR2, CITY, STATE, ZIP, COUNTRY, PHONE, USERID)
-    VALUES
-      (#{email}, #{firstName}, #{lastName}, #{status}, #{address1},  #{address2,jdbcType=VARCHAR}, #{city}, #{state}, #{zip}, #{country}, #{phone}, #{username})
+        INSERT INTO ACCOUNT
+          (EMAIL, FIRSTNAME, LASTNAME, STATUS, ADDR1, ADDR2, CITY, STATE, ZIP, COUNTRY, PHONE, USERID)
+        VALUES
+          (#{email}, #{firstName}, #{lastName}, #{status}, #{address1},  #{address2,jdbcType=VARCHAR}, #{city}, #{state}, #{zip}, #{country}, #{phone}, #{username})
     </insert>
+
     <update id="updateAccount" parameterType="Account">
-    UPDATE ACCOUNT SET
-      EMAIL = #{email},
-      FIRSTNAME = #{firstName},
-      LASTNAME = #{lastName},
-      STATUS = #{status},
-      ADDR1 = #{address1},
-      ADDR2 = #{address2,jdbcType=VARCHAR},
-      CITY = #{city},
-      STATE = #{state},
-      ZIP = #{zip},
-      COUNTRY = #{country},
-      PHONE = #{phone}
-    WHERE USERID = #{username}
+        UPDATE ACCOUNT SET
+          EMAIL = #{email},
+          FIRSTNAME = #{firstName},
+          LASTNAME = #{lastName},
+          STATUS = #{status},
+          ADDR1 = #{address1},
+          ADDR2 = #{address2,jdbcType=VARCHAR},
+          CITY = #{city},
+          STATE = #{state},
+          ZIP = #{zip},
+          COUNTRY = #{country},
+          PHONE = #{phone}
+        WHERE USERID = #{username}
     </update>
+
+    <insert id="insertProfile" parameterType="Account">
+        INSERT INTO PROFILE (LANGPREF, FAVCATEGORY, USERID)
+        VALUES (#{languagePreference}, #{favouriteCategoryId}, #{username})
+    </insert>
+
+    <update id="updateProfile" parameterType="account">
+        UPDATE PROFILE SET
+          LANGPREF = #{languagePreference},
+          FAVCATEGORY = #{favouriteCategoryId}
+        WHERE USERID = #{username}
+    </update>
+
+    <update id="updateSignon" parameterType="account">
+        UPDATE SIGNON SET PASSWORD = #{password}
+        WHERE USERNAME = #{username}
+    </update>
+
+    <insert id="insertSignon" parameterType="account">
+        INSERT INTO SIGNON (PASSWORD,USERNAME)
+        VALUES (#{password}, #{username})
+    </insert>
 </mapper>

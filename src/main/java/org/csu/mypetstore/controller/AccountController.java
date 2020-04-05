@@ -1,8 +1,10 @@
 package org.csu.mypetstore.controller;
 
 import org.csu.mypetstore.domain.Account;
+import org.csu.mypetstore.domain.CartItem;
 import org.csu.mypetstore.domain.Product;
 import org.csu.mypetstore.service.AccountService;
+import org.csu.mypetstore.service.CartItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +14,14 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/account")
-@SessionAttributes({"account", "myList", "authenticated"})
+@SessionAttributes({"account", "myList", "authenticated","cartItemList"})
 public class AccountController {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private CartItemService cartItemService;
 
     @GetMapping("/singOnForm")
     public String singOnForm(){
@@ -34,9 +39,10 @@ public class AccountController {
         }else {
             loginAccount.setPassword(null);
 //            List<Product> myList =catalogService.getProductListByCategory(loginAccount.getFavouriteCategoryId());
+            List<CartItem> cartItemList=cartItemService.getCartItemListByUsername(loginAccount.getUsername());
             boolean authenticated = true;
             model.addAttribute("account", loginAccount);
-
+            model.addAttribute("cartItemList",cartItemList);
 //            model.addAttribute("myList",myList);
             model.addAttribute("authenticated",authenticated);
             return "catalog/Main";

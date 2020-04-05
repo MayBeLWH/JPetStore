@@ -13,9 +13,19 @@ public class CartItem implements Serializable {
   private boolean inStock;
   private BigDecimal total;
   private String cartItemId;
+  private String itemid;
   public CartItem(){
     quantity=1;
   }
+
+  public String getItemid() {
+    return itemid;
+  }
+
+  public void setItemid(String itemid) {
+    this.itemid = itemid;
+  }
+
   public String getCartItemId() {
     return cartItemId;
   }

@@ -1,6 +1,8 @@
 package org.csu.mypetstore.domain;
 
 //import com.ibatis.common.util.PaginatedArrayList;
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -10,9 +12,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+@Component("cart")
 public class Cart {
   private final Map<String, CartItem> itemMap = Collections.synchronizedMap(new HashMap<String, CartItem>());
-  private List<CartItem> itemList;
+  private List<CartItem> itemList = new ArrayList<CartItem>();
   private String userId;
   private int numberOfItems;
 

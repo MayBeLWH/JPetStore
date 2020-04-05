@@ -5,11 +5,19 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AccountMapper {
-    public Account findAccountByUsername(String username);
+    Account findAccountByUsername(String username);
 
-    public Account findAccountByUsernameAndPassword(String username,String password);
+    Account findAccountByUsernameAndPassword(String username,String password);
 
-    public void insertAccount(Account account);
+    void insertAccount(Account account);
 
-    public void updateAccount(Account account);
+    void updateAccount(Account account);
+
+    void insertProfile(Account account);
+
+    void insertSignOn(Account account);
+
+    void updateProfile(Account account);
+
+    void updateSignon(Account account);
 }

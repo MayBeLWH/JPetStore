@@ -21,9 +21,16 @@ public class AccountService {
 
     public void insertAccount(Account account){
         accountMapper.insertAccount(account);
+        accountMapper.insertProfile(account);
+        accountMapper.insertSignOn(account);
     }
 
     public void editAccount(Account account){
         accountMapper.updateAccount(account);
+        accountMapper.updateProfile(account);
+
+        if(account.getPassword() != null && account.getPassword().length() > 0){
+            accountMapper.updateSignon(account);
+        }
     }
 }
