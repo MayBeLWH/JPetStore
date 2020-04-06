@@ -41,4 +41,8 @@ public class CatalogService {
     public Item getItem(String itemId) {
         return itemMapper.getItem(itemId);
     }
+
+    public List<Product> searchProductList(String keyword) {
+        return productMapper.searchProductList("%" + keyword.toLowerCase() + "%");
+    }
 }

@@ -47,31 +47,6 @@
             </div>
             <div id="Separator">&nbsp;</div>
         </div>
-        <script type="text/javascript">
-            function showInfo(catalogId,event) {
-                $.get('viewCatalogInfo?catalogId='+catalogId,function (data) {
-                    var inform = document.getElementById("showDiv");
-                    inform.innerHTML = data;
-                    inform.style.display = "block";
-                    var x=event.clientX;
-                    var y=event.clientY;
-                    inform.style.left=x;
-                    inform.style.top=y;
-                });
-            }
-            function hideInfo(event) {
-                var informDiv = document.getElementById('showDiv');
-                var x=event.clientX;
-                var y=event.clientY;
-                var divx1 = informDiv.offsetLeft;
-                var divy1 = informDiv.offsetTop;
-                var divx2 = informDiv.offsetLeft + informDiv.offsetWidth;
-                var divy2 = informDiv.offsetTop + informDiv.offsetHeight;
-                if( x < divx1 || x > divx2 || y < divy1 || y > divy2){
-                    document.getElementById('showDiv').style.display='none';
-                }
-            }
-        </script>>
     </div>
     <div th:replace="common/Bottom"></div>
 </body>

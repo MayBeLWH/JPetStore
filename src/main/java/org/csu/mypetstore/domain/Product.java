@@ -9,6 +9,24 @@ public class Product{
   private String categoryId;
   private String name;
   private String description;
+  private String descriptionImage;
+  private String descriptionText;
+
+  public String getDescriptionImage() {
+    return descriptionImage;
+  }
+
+  public void setDescriptionImage(String descriptionImage) {
+    this.descriptionImage = descriptionImage;
+  }
+
+  public String getDescriptionText() {
+    return descriptionText;
+  }
+
+  public void setDescriptionText(String descriptionText) {
+    this.descriptionText = descriptionText;
+  }
 
   public String getProductId() {
     return productId;

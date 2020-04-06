@@ -6,7 +6,7 @@ body {
   color: #333;
   background-color: #444;
 }
-#category-title{
+.Title{
   color: #FFFFFF;
 }
 pre {
@@ -25,6 +25,7 @@ h1 {
   font-weight: 900;
   color: #666;
 }
+
 
 h2 {
   margin: 2ex 0ex 1ex 0ex;
@@ -239,7 +240,7 @@ body>#Banner {
   height: 9ex;
 }
 
-#Content {
+#content {
   margin: 0;
   padding: 0ex 0ex 0ex 0ex;
   width: 99%;

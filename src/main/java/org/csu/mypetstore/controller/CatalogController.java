@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -54,10 +55,30 @@ public class CatalogController {
     public String viewItem(String itemId,Model model){
         if (itemId != null){
             Item item=catalogService.getItem(itemId);
+            Product product=item.getProduct();
+            processProductDescription(product);
+            model.addAttribute("product",product);
             model.addAttribute("item",item);
             return "catalog/Item";
         }
         return "catalog/Main";
     }
+    private void processProductDescription(Product product){
+        String [] temp = product.getDescription().split("\"");
+        product.setDescriptionImage("../"+temp[1]);
+        product.setDescriptionText(temp[2].substring(1));
+    }
+    private void processProductDescription(List<Product> productList){
+        for(Product product : productList) {
+            processProductDescription(product);
+        }
+    }
 
+    @PostMapping("/searchProduct")
+    public String searchProduct(String keyword ,Model model){
+        List<Product> productList=catalogService.searchProductList(keyword);
+        model.addAttribute("productList",productList);
+        processProductDescription(productList);
+        return "catalog/SearchProducts";
+    }
 }

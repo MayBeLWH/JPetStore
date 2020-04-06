@@ -59,7 +59,7 @@ public class CartController {
     @GetMapping("/addItemToCart")
     public String addItemToCart(HttpServletRequest request,String workingItemId,Model model){
         Account account = (Account) request.getSession().getAttribute("account");
-        List<CartItem> myCartItemList = (List<CartItem>) request.getSession().getAttribute("cartItemList");
+//        List<CartItem> myCartItemList = (List<CartItem>) request.getSession().getAttribute("cartItemList");
         if (account == null){
             return "account/SignOn";
         }else{
@@ -75,6 +75,11 @@ public class CartController {
             model.addAttribute("cart",cart);
             return "cart/Cart";
         }
+    }
 
+    @GetMapping("/askCheckOut")
+    public String askCheckOut(@SessionAttribute("cart")Cart cart,Model model){
+        model.addAttribute("cart",cart);
+        return "cart/CheckOut";
     }
 }

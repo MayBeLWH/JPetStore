@@ -30,7 +30,7 @@
                             <td colspan="8"><b>Your cart is empty.</b></td>
                         </tr>
 
-                        <tr th:each="cartItem:${cart.cartItems}">
+                        <tr th:each="cartItem:${cart.cartItemList}">
                             <td>
                                 <a th:href="'/catalog/viewItem?itemId='+${cartItem.item.itemId}" th:text="${cartItem.item.itemId}"></a>
                             </td>
@@ -57,7 +57,7 @@
                     </table>
                 </form>
 
-                <a class="Button" th:if="${cart.numberOfItems > 0}" href="/order/askCheckOut">
+                <a class="Button" th:if="${cart.numberOfItems > 0}" href="/cart/askCheckOut">
                     Proceed to Checkout
                 </a>
             </div>

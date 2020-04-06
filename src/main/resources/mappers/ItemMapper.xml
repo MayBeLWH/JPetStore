@@ -44,4 +44,16 @@
           and I.ITEMID = V.ITEMID
           and I.ITEMID = #{value}
     </select>
+
+    <update id="updateInventoryQuantity" parameterType="map">
+        UPDATE INVENTORY SET
+            QTY = QTY - #{increment}
+        WHERE ITEMID = #{itemId}
+    </update>
+
+    <select id="getInventoryQuantity"  parameterType="string" resultType="int">
+        SELECT QTY AS value
+        FROM INVENTORY
+        WHERE ITEMID = #{itemId}
+    </select>
 </mapper>

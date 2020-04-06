@@ -272,20 +272,20 @@ public class Order implements Serializable {
     shipZip = account.getZip();
     shipCountry = account.getCountry();
 
-    billToFirstName = account.getFirstName();
-    billToLastName = account.getLastName();
-    billAddress1 = account.getAddress1();
-    billAddress2 = account.getAddress2();
-    billCity = account.getCity();
-    billState = account.getState();
-    billZip = account.getZip();
-    billCountry = account.getCountry();
+//    billToFirstName = account.getFirstName();
+//    billToLastName = account.getLastName();
+//    billAddress1 = account.getAddress1();
+//    billAddress2 = account.getAddress2();
+//    billCity = account.getCity();
+//    billState = account.getState();
+//    billZip = account.getZip();
+//    billCountry = account.getCountry();
 
     totalPrice = cart.getSubTotal();
 
-    creditCard = "999 9999 9999 9999";
+//    creditCard = "999 9999 9999 9999";
     expiryDate = "12/03";
-    cardType = "Visa";
+//    cardType = "Visa";
     courier = "UPS";
     locale = "CA";
     status = "P";

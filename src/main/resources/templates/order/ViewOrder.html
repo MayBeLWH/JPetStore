@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MyPetStore</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<div th:replace="common/Top"></div>
+<div id="content">
+    <div id="BackLink">
+        <a href="/catalog/view">Return to Main Menu</a>>
+    </div>
+
+    <div id="Catalog" align="center">
+
+        <table>
+            <tr>
+                <th align="center" colspan="2" th:text="'Order '+${order.orderId}">
+                    Order #${sessionScope.order.orderId}
+                    <font style="color: aquamarine" th:text="${order.orderDate}">${sessionScope.order.orderDate}</font>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="2">Payment Details</th>
+            </tr>
+            <tr>
+                <td>Card Type:</td>
+                <td><label th:text="${order.cardType}" /></td>
+            </tr>
+            <tr>
+                <td>Card Number:</td>
+                <td><label th:text="${order.creditCard}" /> * Fake
+                    number!</td>
+            </tr>
+            <tr>
+                <td>Expiry Date (MM/YYYY):</td>
+                <td><label th:text="${order.expiryDate}" /></td>
+            </tr>
+            <tr>
+                <th colspan="2">Billing Address</th>
+            </tr>
+            <tr>
+                <td>First name:</td>
+                <td><label th:text="${order.billToFirstName}" /></td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td><label th:text="${order.billToLastName}" /></td>
+            </tr>
+            <tr>
+                <td>Address 1:</td>
+                <td><label th:text="${order.billAddress1}" /></td>
+            </tr>
+            <tr>
+                <td>Address 2:</td>
+                <td><label th:text="${order.billAddress2}" /></td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td><label th:text="${order.billCity}" /></td>
+            </tr>
+            <tr>
+                <td>State:</td>
+                <td><label th:text="${order.billState}" /></td>
+            </tr>
+            <tr>
+                <td>Zip:</td>
+                <td><label th:text="${order.billZip}" /></td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td><label th:text="${order.billCountry}" /></td>
+            </tr>
+            <tr>
+                <th colspan="2">Shipping Address</th>
+            </tr>
+            <tr>
+                <td>First name:</td>
+                <td><label th:text="${order.shipToFirstName}" /></td>
+            </tr>
+            <tr>
+                <td>Last name:</td>
+                <td><label th:text="${order.shipToLastName}" /></td>
+            </tr>
+            <tr>
+                <td>Address 1:</td>
+                <td><label th:text="${order.shipAddress1}" /></td>
+            </tr>
+            <tr>
+                <td>Address 2:</td>
+                <td><label th:text="${order.shipAddress2}" /></td>
+            </tr>
+            <tr>
+                <td>City:</td>
+                <td><label th:text="${order.shipCity}" /></td>
+            </tr>
+            <tr>
+                <td>State:</td>
+                <td><label th:text="${order.shipState}" /></td>
+            </tr>
+            <tr>
+                <td>Zip:</td>
+                <td><label th:text="${order.shipZip}" /></td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                <td><label th:text="${order.shipCountry}" /></td>
+            </tr>
+            <tr>
+                <td>Courier:</td>
+                <td><label th:text="${order.courier}" /></td>
+            </tr>
+            <tr>
+                <td colspan="2">Status:<label th:text="${order.status}" /></td>
+            </tr>
+            <tr>
+                <th colspan="2">Items</th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <th>Item ID</th>
+                            <th>Description</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total Cost</th>
+                        </tr>
+                            <tr th:each="lineItem:${order.lineItems}">
+                                <td>
+                                    <a th:href="@{/catalog/viewItem(itemId=${lineItem.item.itemId})}"
+                                        th:text="${lineItem.item.itemId}">${lineItem.item.itemId}</a>
+                                </td>
+                                <td>
+                                    <label th:if="${lineItem.item != null}"
+                                           th:text="${lineItem.item.attribute1}" />
+                                    <label th:if="${lineItem.item == null}">
+                                        <i>{description unavailable}</i>
+                                    </label>
+                                </td>
+
+                                <td th:text="${lineItem.quantity}"></td>
+                                <td><label th:text="${#numbers.formatDecimal(lineItem.unitPrice,1,2)}"/></td>
+                                <td><label th:text="${#numbers.formatDecimal(lineItem.unitPrice*lineItem.quantity,1,2)}"/></td>
+                            </tr>
+                        <tr>
+                            <th colspan="5">Total: <label th:text="${#numbers.formatDecimal(order.totalPrice,1,2)}"/></th>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+</div>
+<div th:replace="common/Bottom"></div>
+</body>
+</html>

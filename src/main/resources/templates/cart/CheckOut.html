@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MyPetStore</title>
+    <link rel="StyleSheet" href="../css/jpetstore.css" type="text/css" media="screen"/>
+</head>
+<body>
+<div th:replace="common/Top"></div>
+<div id="content">
+    <div id="BackLink">
+        <a href="viewCart">Return to Shopping Cart</a>
+    </div>
+
+    <div id="Catalog">
+
+        <table>
+            <tr>
+                <td>
+                    <h2>Checkout Summary</h2>
+                    <table>
+
+                        <tr>
+                            <th><b>Item ID</b></th>
+                            <th><b>Product ID</b></th>
+                            <th><b>Description</b></th>
+                            <th><b>In Stock?</b></th>
+                            <th><b>Quantity</b></th>
+                            <th><b>List Price</b></th>
+                            <th><b>Total Cost</b></th>
+                        </tr>
+                            <tr th:each="cartItem:${cart.cartItems}">
+                                <td>
+                                    <a th:href="@{/catalog/viewItem(itemId=${cartItem.item.itemId})}"
+                                        th:text="${cartItem.item.itemId}"></a>
+                                </td>
+                                <td th:text="${cartItem.item.product.productId}"></td>
+                                <td th:text="${cartItem.item.attribute1}">
+                                </td>
+                                <td th:text="${cartItem.inStock}"></td>
+                                <td th:text="${cartItem.quantity}"></td>
+                                <td>
+                                    <label th:text="${#numbers.formatDecimal(cartItem.item.listPrice,1,2)}" />
+                                </td>
+                                <td>
+                                    <label th:text="${#numbers.formatDecimal(cartItem.total,1,2)}" />
+                                </td>
+                            </tr>
+                        <tr>
+                            <td colspan="7">
+                                Sub Total:
+                                <label th:text="${#numbers.formatDecimal(session.cart.subTotal,1,2)}" />
+                            </td>
+                        </tr>
+                    </table>
+
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+        <a class="Button" href="/order/askNewOrder">Pay</a>
+    </div>
+</div>
+<div th:replace="common/Bottom"></div>
+</body>
+</html>

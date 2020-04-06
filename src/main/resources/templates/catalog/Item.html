@@ -9,7 +9,8 @@
 <div th:replace="common/Top"></div>
 <div id="content">
     <div id="BackLink">
-        <a th:href="@{/catalog/viewProduct(productId=${item.getProduct().getProductId()})}">
+        <a th:href="@{/catalog/viewProduct(productId=${item.getProduct().getProductId()})}"
+            th:text="'Return to '+${product.getProductId()}">
             Return to ${sessionScope.product.productId}
         </a>
     </div>
@@ -18,7 +19,10 @@
 
         <table>
             <tr>
-                <td th:text="${item.getProduct().getDescription()}">product.description</td>
+                <td >
+                    <img th:src="${product.descriptionImage}">
+                    <label th:text="${product.descriptionText}"></label>
+                </td>
             </tr>
             <tr>
                 <td th:text="${item.getItemId()}"><b>item.itemId</b></td>
