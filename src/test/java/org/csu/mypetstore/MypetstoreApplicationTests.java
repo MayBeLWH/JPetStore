@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Random;
 
 @SpringBootTest
 @MapperScan("org.csu.mypetstore.persistence")
@@ -25,6 +26,13 @@ class MypetstoreApplicationTests {
     public void test(){
         List<Product> productList=catalogService.getProductListByCategory("BIRDS");
         System.out.println(productList.size());
+    }
+
+    @Test
+    private String getWords(){
+        String result=String.valueOf(new Random().nextInt(9000)+1000);
+        System.out.println(result);
+        return result;
     }
 
 }

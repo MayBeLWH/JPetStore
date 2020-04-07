@@ -18,11 +18,10 @@
                 <div id="MenuContent">
                     <a href="/cart/viewCart"><img align="middle" name="img_cart" src="../images/cart.gif" /></a>
                     <img align="middle" src="../images/separator.gif" />
-                    <a href="/account/signOut" th:if="(${ session.account } != null)and (${session.authenticated})">Sign Out</a>
-                    <a th:if="${session.account} == null" href="/account/singOnForm">Sign In</a>
-                    <a href="/account/singOnForm" th:if="(${session.account} != null) and (${!session.authenticated})">Sign In</a>
-                    <img align="middle" src="../images/separator.gif" th:if="(${ session.account } != null)and (${session.authenticated})" />
-                    <a href="/account/viewAccount" th:if="(${ session.account } != null)and (${session.authenticated})">My Account</a>
+                    <a href="/account/signOut" th:if="(${ session.accountState })">Sign Out</a>
+                    <a th:if="${ !session.accountState} " href="/account/singOnForm">Sign In</a>
+                    <img align="middle" src="../images/separator.gif" th:if="(${ session.accountState })" />
+                    <a href="/account/viewAccount" th:if="(${ session.accountState } )">My Account</a>
                     <img align="middle" src="../images/separator.gif" />
                     <a href="../help.html">?</a>
                 </div>

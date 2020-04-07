@@ -95,7 +95,7 @@
         WHERE USERNAME = #{username}
     </update>
 
-    <insert id="insertSignon" parameterType="account">
+    <insert id="insertSignOn" parameterType="account">
         INSERT INTO SIGNON (PASSWORD,USERNAME)
         VALUES (#{password}, #{username})
     </insert>

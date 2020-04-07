@@ -11,11 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
 
 @Controller
 @RequestMapping("/catalog")
+@SessionAttributes({"accountState"})
 public class CatalogController {
 
     @Autowired
@@ -23,6 +25,7 @@ public class CatalogController {
 
     @GetMapping("/view")
     public String view(Model model){
+        model.addAttribute("accountState",false);
         return "catalog/Main";
     }
 
