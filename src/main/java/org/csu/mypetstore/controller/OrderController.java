@@ -35,7 +35,7 @@ public class OrderController {
 
     @PostMapping("/confirmOrder")
     public String confirmOrder(Order newOrder, Model model){
-
+        newOrder.setLineNumber(newOrder.getLineItems().size());
         orderService.insertOrder(newOrder);
         model.addAttribute("order",newOrder);
         return "order/ConfirmOrder";

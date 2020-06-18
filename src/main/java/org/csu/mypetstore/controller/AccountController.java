@@ -67,11 +67,12 @@ public class AccountController {
     }
 
     @GetMapping("/signOut")
-    public String signOut(Model model){
+    public String signOut(@SessionAttribute("accountState") boolean accountState,Model model){
         Account loginAccount = new Account();
 //        List<Product> myList = null;
         boolean authenticated = false;
         model.addAttribute("account", loginAccount);
+        model.addAttribute("accountState",!accountState);
 //        model.addAttribute("myList", myList);
         model.addAttribute("authenticated", authenticated);
         return "catalog/Main";

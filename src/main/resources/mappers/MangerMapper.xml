@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.csu.mypetstore.persistence.MangerMapper">
+    <select id="login" parameterType="String" resultType="Manger">
+        SELECT
+            account,
+            password,
+            telephone,
+            city,
+            address,
+            power,
+            username
+        FROM manger
+        WHERE account = #{account} AND password =#{password}
+    </select>
+
+    <update id="changeInformation" parameterType="Manger">
+        UPDATE manger SET
+            username = #{username},
+            telephone = #{telephone},
+            city = #{city},
+            address = #{address},
+            power = #{power}
+        WHERE account = #{account}
+    </update>
+
+    <update id="changePassword" parameterType="String">
+        UPDATE manger SET
+            password = #{password}
+        WHERE account = #{account}
+    </update>
+</mapper>

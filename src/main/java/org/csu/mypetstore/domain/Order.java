@@ -13,6 +13,7 @@ public class Order implements Serializable {
   private static final long serialVersionUID = 6321792448424424931L;
 
   private int orderId;
+  private int lineNumber;
   private String username;
   private String orderDate;
   private String shipAddress1;
@@ -39,6 +40,14 @@ public class Order implements Serializable {
   private String locale;
   private String status;
   private List<LineItem> lineItems = new ArrayList<LineItem>();
+
+  public int getLineNumber() {
+    return lineNumber;
+  }
+
+  public void setLineNumber(int lineNumber) {
+    this.lineNumber = lineNumber;
+  }
 
   public int getOrderId() {
     return orderId;
@@ -250,6 +259,7 @@ public class Order implements Serializable {
 
   public void setLineItems(List<LineItem> lineItems) {
     this.lineItems = lineItems;
+    this.lineNumber=lineItems.size();
   }
 
   public List<LineItem> getLineItems() {

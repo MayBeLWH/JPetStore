@@ -2,6 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.csu.mypetstore.persistence.OrderMapper">
+
+    <update id="updateOrderStatus" parameterType="Order">
+        UPDATE orderstatus SET
+            status = 'S'
+        WHERE orderid = #{orderId}
+    </update>
+    <update id="updateOrder" parameterType="Order">
+        UPDATE orders SET
+            BILLADDR1 = #{billAddress1},
+            BILLADDR2 = #{billAddress2},
+            BILLCITY = #{billCity},
+            BILLCOUNTRY= #{billCountry},
+            BILLSTATE= #{billState},
+            BILLTOFIRSTNAME= #{billToFirstName},
+            BILLTOLASTNAME= #{billToLastName},
+            BILLZIP= #{billZip},
+            SHIPADDR1 = #{shipAddress1} ,
+            SHIPADDR2 = #{shipAddress2} ,
+            SHIPCITY= #{shipCity},
+            SHIPCOUNTRY= #{shipCountry},
+            SHIPSTATE= #{shipState},
+            SHIPTOFIRSTNAME= #{shipToFirstName},
+            SHIPTOLASTNAME= #{shipToLastName},
+            SHIPZIP = #{shipZip}
+        WHERE orderid = #{orderId}
+    </update>
+
     <insert id="insertOrder" parameterType="Order">
         INSERT INTO ORDERS (ORDERID, USERID, ORDERDATE, SHIPADDR1, SHIPADDR2, SHIPCITY, SHIPSTATE,
           SHIPZIP, SHIPCOUNTRY, BILLADDR1, BILLADDR2, BILLCITY, BILLSTATE, BILLZIP, BILLCOUNTRY,
@@ -15,7 +42,7 @@
 
     <insert id="insertOrderStatus" parameterType="Order">
     INSERT INTO ORDERSTATUS (ORDERID, LINENUM, TIMESTAMP, STATUS)
-    VALUES (#{orderId,jdbcType=NUMERIC}, #{orderId,jdbcType=NUMERIC},
+    VALUES (#{orderId,jdbcType=NUMERIC}, #{lineNumber,jdbcType=NUMERIC},
     #{orderDate,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR})
     </insert>
 
@@ -82,5 +109,37 @@
         FROM ORDERS, ORDERSTATUS
         WHERE ORDERS.ORDERID = #{value}
             AND ORDERS.ORDERID = ORDERSTATUS.ORDERID
+    </select>
+
+    <select id="getAllOrders" resultType="Order">
+      SELECT
+              BILLADDR1 AS billAddress1,
+              BILLADDR2 AS billAddress2,
+              BILLCITY,
+              BILLCOUNTRY,
+              BILLSTATE,
+              BILLTOFIRSTNAME,
+              BILLTOLASTNAME,
+              BILLZIP,
+              SHIPADDR1 AS shipAddress1,
+              SHIPADDR2 AS shipAddress2,
+              SHIPCITY,
+              SHIPCOUNTRY,
+              SHIPSTATE,
+              SHIPTOFIRSTNAME,
+              SHIPTOLASTNAME,
+              SHIPZIP,
+              CARDTYPE,
+              COURIER,
+              CREDITCARD,
+              EXPRDATE AS expiryDate,
+              LOCALE,
+              ORDERDATE,
+              ORDERS.ORDERID,
+              TOTALPRICE,
+              USERID AS username,
+              STATUS
+        FROM ORDERS, ORDERSTATUS
+        WHERE ORDERS.ORDERID = ORDERSTATUS.ORDERID AND ORDERSTATUS.STATUS = 'P'
     </select>
 </mapper>

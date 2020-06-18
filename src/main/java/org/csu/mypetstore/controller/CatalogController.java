@@ -1,18 +1,13 @@
 package org.csu.mypetstore.controller;
 
-import org.csu.mypetstore.domain.Account;
-import org.csu.mypetstore.domain.Category;
-import org.csu.mypetstore.domain.Item;
-import org.csu.mypetstore.domain.Product;
+import org.csu.mypetstore.domain.*;
 import org.csu.mypetstore.service.CatalogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -66,6 +61,15 @@ public class CatalogController {
         }
         return "catalog/Main";
     }
+
+
+    @PostMapping("/searchProduct")
+    public String searchProduct(String keyword ,Model model){
+        List<Product> productList=catalogService.searchProductList(keyword);
+        model.addAttribute("productList",productList);
+        processProductDescription(productList);
+        return "catalog/SearchProducts";
+    }
     private void processProductDescription(Product product){
         String [] temp = product.getDescription().split("\"");
         product.setDescriptionImage("../"+temp[1]);
@@ -75,13 +79,5 @@ public class CatalogController {
         for(Product product : productList) {
             processProductDescription(product);
         }
-    }
-
-    @PostMapping("/searchProduct")
-    public String searchProduct(String keyword ,Model model){
-        List<Product> productList=catalogService.searchProductList(keyword);
-        model.addAttribute("productList",productList);
-        processProductDescription(productList);
-        return "catalog/SearchProducts";
     }
 }

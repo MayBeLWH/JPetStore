@@ -80,4 +80,23 @@ public class OrderService {
         return sequence.getNextId();
     }
 
+    public List<Order> getAllOrders(){
+        List<Order> orderList= orderMapper.getAllOrders();
+
+        for (int i = 0; i < orderList.size(); i++) {
+            orderList.get(i).setLineItems(lineItemMapper.getLineItemsByOrderId(orderList.get(i).getOrderId()));
+            for (int j = 0; j < orderList.get(i).getLineItems().size(); j++) {
+                LineItem lineItem = (LineItem) orderList.get(i).getLineItems().get(j);
+                Item item = itemMapper.getItem(lineItem.getItemId());
+                item.setQuantity(itemMapper.getInventoryQuantity(lineItem.getItemId()));
+                lineItem.setItem(item);
+            }
+        }
+
+        return orderList;
+    }
+    public void updateOrder(Order order){
+        orderMapper.updateOrder(order);
+        orderMapper.updateOrderStatus(order);
+    }
 }

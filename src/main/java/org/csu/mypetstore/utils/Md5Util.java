@@ -9,9 +9,6 @@ public class Md5Util {
         System.out.println("md5加密结果："+DigestUtils.md5DigestAsHex(password_web.getBytes()));
         return DigestUtils.md5DigestAsHex(password_web.getBytes());
     }
-    public static void main(String []args){
-        encrypt("lgz");
-    }
 }
 
 

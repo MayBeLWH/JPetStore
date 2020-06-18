@@ -15,4 +15,10 @@ public interface OrderMapper {
     List<Order> getOrdersByUsername(String username);
 
     Order getOrder(int orderId);
+
+    List<Order> getAllOrders();
+
+    void updateOrder(Order order);
+
+    void updateOrderStatus(Order order);
 }
